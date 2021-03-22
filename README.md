@@ -21,12 +21,12 @@ Vérifiez les versions installées de `node` (minimum `v8.x`) et `npm` (minimum 
 
 ```bash
 node -v
-v8.9.3
+v12.13.0
 ```
 
 ```bash
 npm -v
-5.5.1
+7.6.3
 ```
 
 ## Jeu de données
@@ -77,6 +77,14 @@ Coordonnées GPS du quartier de *Lansdale, PA, USA* :
 
 Le résultat attendu est **717**.
 
+```BASH 
+TODO : Requête Mongo
+```
+
+```BASH 
+TODO : Requête Elasticsearch
+```
+
 ### Compter le nombre d'appels par catégorie
 
 Le résultat attendu est :
@@ -84,6 +92,14 @@ Le résultat attendu est :
 | EMS   | Fire  | Traffic |
 | ----- | ----- | ------- |
 | 75589 | 23056 | 54549   |
+
+```BASH 
+TODO : Requête Mongo
+```
+
+```BASH 
+TODO : Requête Elasticsearch
+```
 
 ### Trouver les 3 mois ayant comptabilisés le plus d'appels
 
@@ -93,6 +109,14 @@ Le résultat attendu est :
 | ------- | ------- | ------- |
 | 13096   | 12502   | 12162   |
 
+```BASH 
+TODO : Requête Mongo
+```
+
+```BASH 
+TODO : Requête Elasticsearch
+```
+
 ### Trouver le top 3 des villes avec le plus d'appels pour overdose
 
 Le résultat attendu est :
@@ -100,3 +124,22 @@ Le résultat attendu est :
 | POTTSTOWN | NORRISTOWN | UPPER MORELAND |
 | --------- | ---------- | -------------- |
 | 203       | 180        | 110            |
+
+```BASH 
+TODO : Requête Mongo
+```
+
+```BASH 
+TODO : Requête Elasticsearch
+```
+
+### Kibana
+
+Créer un Dashboard contenant les éléments suivants :
+
+* Un camembert contenant la répartition d'appels par catégorie
+* Un histograpmme représentant la répartition d'appel par "heure de la jouurnée" (comment sont répartis les appels, **toutes journées confondues")
+* Une courbe représentant l'évolution des appels dans le temps dans les 10 villes qui concentrent le plus d'appels
+* Une carte, de type "heat map" représentant la répartition des appels
+
+![](https://via.placeholder.com/800x600.png?text=Votre+Dashboard+Ici)
