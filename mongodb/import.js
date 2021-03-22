@@ -1,18 +1,18 @@
-var mongodb = require('mongodb');
-var csv = require('csv-parser');
-var fs = require('fs');
+const {MongoClient} = require('mongodb');
+const csv = require('csv-parser');
+const fs = require('fs');
+const { mainModule } = require('process');
 
-var MongoClient = mongodb.MongoClient;
-var mongoUrl = 'mongodb://localhost:27017/911-calls';
+const mongoUrl = 'mongodb://localhost:27017/911-calls';
 
-var insertCalls = function(db, callback) {
-    var collection = db.collection('calls');
+const insertCalls = async function(client, callback) {
+    const collection = client.db("911").collection('calls');
 
-    var calls = [];
+    const calls = [];
     fs.createReadStream('../911.csv')
         .pipe(csv())
         .on('data', data => {
-            var call = {}; // TODO créer l'objet call à partir de la ligne
+            const call = {}; // TODO créer l'objet call à partir de la ligne
             calls.push(call);
         })
         .on('end', () => {
@@ -22,9 +22,16 @@ var insertCalls = function(db, callback) {
         });
 }
 
-MongoClient.connect(mongoUrl, (err, db) => {
-    insertCalls(db, result => {
-        console.log(`${result.insertedCount} calls inserted`);
-        db.close();
-    });
-});
+
+const main = async () => {
+  const client = new MongoClient(mongoUrl, { useUnifiedTopology: true });
+  await client.connect({useUnifiedTopology: true});
+  
+
+  insertCalls(client, result => {
+    console.log(`${result.insertedCount} calls inserted`);
+    db.close();
+  });
+};
+
+main();
