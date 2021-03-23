@@ -1,17 +1,41 @@
-var elasticsearch = require('elasticsearch');
-var csv = require('csv-parser');
-var fs = require('fs');
+//const elasticsearch = require('elasticsearch');
+const csv = require('csv-parser');
+const fs = require('fs');
+const { Client } = require('@elastic/elasticsearch');
 
-var esClient = new elasticsearch.Client({
-  host: 'localhost:9200',
-  log: 'error'
-});
+const ELASTIC_SEARCH_URI = 'http://localhost:9200';
+const INDEX_NAME = '911-calls';
 
-fs.createReadStream('../911.csv')
+async function run() {
+  const client = new Client({ node: ELASTIC_SEARCH_URI});
+
+  // Drop index if exists
+  await client.indices.delete({
+    index: INDEX_NAME,
+    ignore_unavailable: true
+  });
+
+  await client.indices.create({
+    index: INDEX_NAME,
+    body : {
+      // TODO configurer l'index https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html
+    }
+  });
+
+  fs.createReadStream('../911.csv')
     .pipe(csv())
     .on('data', data => {
-      // TODO extract one line from CSV
+      const call = { 
+      };
+      // TODO créer l'objet call à partir de la ligne
     })
-    .on('end', () => {
-      // TODO insert data to ES
+    .on('end', async () => {
+      // TODO insérer les données dans ES en utilisant l'API de bulk https://www.elastic.co/guide/en/elasticsearch/reference/7.x/docs-bulk.html
     });
+  
+
+}
+
+run().catch(console.log);
+
+
