@@ -3,10 +3,11 @@ const csv = require('csv-parser');
 const fs = require('fs');
 const { mainModule } = require('process');
 
-const mongoUrl = 'mongodb://localhost:27017/911-calls';
+const MONGO_URL = 'mongodb://localhost:27017/';
+const DB_NAME = '911-calls'
 
-const insertCalls = async function(client, callback) {
-    const collection = client.db("911").collection('calls');
+const insertCalls = async function(db, callback) {
+    const collection = db.collection('calls');
 
     const calls = [];
     fs.createReadStream('../911.csv')
@@ -22,16 +23,14 @@ const insertCalls = async function(client, callback) {
         });
 }
 
-
-const main = async () => {
-  const client = new MongoClient(mongoUrl, { useUnifiedTopology: true });
-  await client.connect({useUnifiedTopology: true});
-  
-
-  insertCalls(client, result => {
-    console.log(`${result.insertedCount} calls inserted`);
-    db.close();
+MongoClient.connect(MONGO_URL, (err, client) => {
+  if (err) {
+      console.error(err);
+      throw err;
+  }
+  const db = client.db(DB_NAME);
+  insertCalls(db, result => {
+      console.log(`${result.insertedCount} actors inserted`);
+      client.close();
   });
-};
-
-main();
+});
