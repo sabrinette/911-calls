@@ -21,10 +21,87 @@ GET <nom de votre index>/_count
 
 À vous de jouer ! Écrivez les requêtes ElasticSearch permettant de résoudre les problèmes posés.
 
+les requêtes ElasticSearch:
+* le nombre d'appels par catégorie:
+```bash
+POST /911-calls/_search
+{
+  "size": 0,
+  "aggs" : {
+         "title1" : {
+            "terms": {
+                "field": "title1.keyword"
+            }
+        }
+    }  
+} 
 ```
-TODO : ajouter les requêtes ElasticSearch ici
+* les 3 mois ayant comptabilisés le plus d'appels:
+```bash
+POST /911-calls/_search 
+{ 
+  "size": 0, 
+  "aggs": 
+    { 
+      "timeStamp": 
+        { 
+          "terms": 
+          { 
+            "field": "timeStamp.keyword", 
+            "size" : 3, 
+            "order":
+              { "_count": "desc" } 
+            
+          } 
+          
+        } 
+      
+    } 
+}
+```
+* le top 3 des villes avec le plus d'appels pour overdose:
+```bash
+  POST /911-calls/_search 
+{ "query" : 
+    { 
+        "wildcard" : 
+            { 
+                "title2" : 
+                    { 
+                        "value" : "OVERDOSE" 
+                    } 
+            } 
+    },  
+    "size": 0, 
+    "aggs": 
+        { 
+            "twp": 
+                { 
+                    "terms": { "field": "twp.keyword", "size" : 3, "order": { "_count": "desc" } } 
+                } 
+            } 
+        }
 ```
 
+
+* le nombre d'appels autour de Lansdale dans un rayon de 500 mètres:
+```bash
+GET /911-calls/_count 
+{ 
+    "query": 
+        { 
+            "bool" : 
+                { 
+                    "filter" : 
+                        { 
+                            "geo_distance" : 
+                            { "distance" :-ca "500m", "location" : "40.241493, -75.283783" } 
+                        } 
+                } 
+        } 
+}
+
+```
 ## Kibana
 
 Dans Kibana, créez un dashboard qui permet de visualiser :

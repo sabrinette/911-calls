@@ -95,6 +95,17 @@ db.calls.aggregate(
 
 * le nombre d'appels autour de Lansdale dans un rayon de 500 mètres:
 ```sh
+db.calls.createIndex( { location : "2dsphere" } )
+db.calls.find(
+   {"location":
+       { $near :
+          {
+            $geometry: { type: "Point",  coordinates: [ -75.283783, 40.241493 ] },
+            $maxDistance: 500
+          }
+       }
+   }
+).count()
 ```
 
 
