@@ -68,23 +68,6 @@ La donnée `titre` est particulière, elle débute toujours par un identifiant p
 
 L'objectif est d'importer les données dans [ElasticSearch](./elasticsearch) et dans [MongoDB](./mongodb) et de construire un certain nombre de requêtes pour répondre à différents besoins listés ci-après.
 
-### Compter le nombre d'appels autour de Lansdale dans un rayon de 500 mètres
-
-Coordonnées GPS du quartier de *Lansdale, PA, USA* :
-
-* Latitude : 40.241493
-* Longitude : -75.283783
-
-Le résultat attendu est **717**.
-
-```BASH 
-TODO : Requête Mongo
-```
-
-```BASH 
-TODO : Requête Elasticsearch
-```
-
 ### Compter le nombre d'appels par catégorie
 
 Le résultat attendu est :
@@ -124,6 +107,25 @@ Le résultat attendu est :
 | POTTSTOWN | NORRISTOWN | UPPER MORELAND |
 | --------- | ---------- | -------------- |
 | 203       | 180        | 110            |
+
+```BASH 
+TODO : Requête Mongo
+```
+
+```BASH 
+TODO : Requête Elasticsearch
+```
+
+### Compter le nombre d'appels autour de Lansdale dans un rayon de 500 mètres
+
+Coordonnées GPS du quartier de *Lansdale, PA, USA* :
+
+* Latitude : 40.241493
+* Longitude : -75.283783
+
+Le résultat attendu est **717**.
+
+Pour vous aider, vous pouvez jeter un oeil à [$near](https://docs.mongodb.com/manual/reference/operator/query/near/index.html) et [geo_distance](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html)
 
 ```BASH 
 TODO : Requête Mongo
