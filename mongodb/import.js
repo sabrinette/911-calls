@@ -48,7 +48,6 @@ MongoClient.connect(MONGO_URL, {
 
 async function dropCollectionIfExists(db, collection) {
   const matchingCollections = await db.listCollections({name: COLLECTION_NAME}).toArray();
-  console.log(matchingCollections);
   if (matchingCollections.length > 0) {
     await collection.drop();
   }
