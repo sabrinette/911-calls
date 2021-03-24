@@ -20,8 +20,16 @@ const insertCalls = async function (db, callback) {
     .pipe(csv())
     .on('data', data => {
 
+      // créer l'objet call à partir de la ligne
       const call = {
-      }; // TODO créer l'objet call à partir de la ligne
+        "lat":data.lat,
+        "lng":data.lng,
+        "title":data.title.slice(0, data.title.indexOf(':')),
+        "zip":data.zip,
+        "timeStamp":data.timeStamp.slice(0,7),
+        "twp":data.twp,
+        "addr":data.addr
+      }; 
 
       calls.push(call);
     })
