@@ -105,15 +105,3 @@ Coordonnées GPS du quartier de *Lansdale, PA, USA* :
 Le résultat attendu est **717**.
 
 Pour vous aider, vous pouvez jeter un oeil à [$near](https://docs.mongodb.com/manual/reference/operator/query/near/index.html) et [geo_distance](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-geo-distance-query.html)
-
-
-### Kibana
-
-Créer un Dashboard contenant les éléments suivants :
-
-* Un camembert contenant la répartition d'appels par catégorie
-* Un histograpmme représentant la répartition d'appel par "heure de la jouurnée" (comment sont répartis les appels, **toutes journées confondues")
-* Une courbe représentant l'évolution des appels dans le temps dans les 10 villes qui concentrent le plus d'appels
-* Une carte, de type "heat map" représentant la répartition des appels
-
-![](https://via.placeholder.com/800x600.png?text=Votre+Dashboard+Ici)
