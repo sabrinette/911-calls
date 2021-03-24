@@ -20,7 +20,8 @@ const insertCalls = async function (db, callback) {
     .pipe(csv())
     .on('data', data => {
 
-      const call = {}; // TODO créer l'objet call à partir de la ligne
+      const call = {
+      }; // TODO créer l'objet call à partir de la ligne
 
       calls.push(call);
     })
@@ -46,9 +47,9 @@ MongoClient.connect(MONGO_URL, {
 });
 
 async function dropCollectionIfExists(db, collection) {
-  if (await db.listCollections({
-    name: COLLECTION_NAME
-  }).toArray().length > 0) {
+  const matchingCollections = await db.listCollections({name: COLLECTION_NAME}).toArray();
+  console.log(matchingCollections);
+  if (matchingCollections.length > 0) {
     await collection.drop();
   }
 }
