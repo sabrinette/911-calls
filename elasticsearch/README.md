@@ -119,8 +119,8 @@ Dans Kibana, créez un dashboard qui permet de visualiser :
 * Un histogramme des appels répartis par catégories
 * Un Pie chart réparti par bimestre, par catégories et par canton (township)
 
-Pour nous permettre d'évaluer votre travail, ajoutez une capture d'écran du dashboard dans ce répertoire [images](images).
-![](911-calls/elasticsearch/images/dashboard.png)
+Pour nous permettre d'évaluer votre travail, ajoutez une capture d'écran du dashboard dans ce répertoire [images](images)
+![](images/dashboard.png)
 
 ### Bonus : Timelion
 Timelion est un outil de visualisation des timeseries accessible via Kibana à l'aide du bouton : ![](images/timelion.png)
