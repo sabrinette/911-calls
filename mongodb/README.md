@@ -31,9 +31,73 @@ Afin de répondre aux différents problèmes, vous allez avoir besoin de créer 
 
 À vous de jouer ! Écrivez les requêtes MongoDB permettant de résoudre les problèmes posés.
 
+Les requêtes MongoDB ici:
+* le nombre d'appels par catégorie:
+```sh
+db.calls.aggregate([
+  {"$group" : 
+    {
+      _id:"$title", 
+      count:{$sum:1}
+    }
+  }
+])
 ```
-TODO : ajouter les requêtes MongoDB ici
+* les 3 mois ayant comptabilisés le plus d'appels:
+```sh
+db.calls.aggregate(
+  {
+    $group:
+    {
+      _id:"$timeStamp", 
+      nb_appel:{$sum:1}
+    }
+  }, 
+  {
+    $sort:
+      {
+        nb_appel:-1
+      }
+  },
+  {
+      $limit:3
+  }
+)
 ```
+* le top 3 des villes avec le plus d'appels pour overdose:
+  
+```sh
+db.calls.aggregate(
+  {
+    $match:
+      {
+        title:"EMS: OVERDOSE"
+      }
+  },
+  {
+    $group:
+      {
+        _id:"$twp", 
+        nb_overdose:{$sum:1}
+      }
+  }, 
+  {
+    $sort:
+      {
+        nb_overdose:-1
+      }
+  }, 
+  {
+    $limit:3
+  }
+)
+```
+
+* le nombre d'appels autour de Lansdale dans un rayon de 500 mètres:
+```sh
+```
+
+
 
 Vous allez sûrement avoir besoin de vous inspirer des points suivants de la documentation :
 
